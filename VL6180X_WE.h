@@ -41,8 +41,8 @@
  * Distributed as-is; no warranty is given.
  ******************************************************************************/
 
-#ifndef VL6180X_WE.h
-#define VL6180X_WE.h
+#ifndef VL6180X_WE_h_
+#define VL6180X_WE_h_
 
 #include <Arduino.h>
 
