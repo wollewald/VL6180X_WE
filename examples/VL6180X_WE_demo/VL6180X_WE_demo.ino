@@ -1,9 +1,12 @@
 /******************************************************************************
  * VL6180X_WE_demo.ino
  * Based on SparkFun's example
- * Only Changes: 
+ * Only Changes to the example: 
  *  - Baud rate changed to 9600
  *  - Name of the library
+ * 
+ * Further information on:
+ * https://wolles-elektronikkiste.de/vl6180x-tof-proximity-and-ambient-light-sensor?lang=en
  * 
  * For reference I did not delete the original comments:
  */
