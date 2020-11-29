@@ -8,4 +8,6 @@ I have added Interrupt functionality for values out of proximity and ambient lig
 
 For more details, please look into my post:
 
-https://wolles-elektronikkiste.de/vl6180x-tof-proximity-and-ambient-light-sensor?lang=en
+https://wolles-elektronikkiste.de/en/vl6180x-tof-proximity-and-ambient-light-sensor (English)
+
+https://wolles-elektronikkiste.de/vl6180x-tof-entfernungs-und-lichtsensormesser (German)
