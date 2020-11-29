@@ -6,7 +6,7 @@
  *  - Name of the library
  * 
  * Further information on:
- * https://wolles-elektronikkiste.de/vl6180x-tof-proximity-and-ambient-light-sensor?lang=en
+ * https://wolles-elektronikkiste.de/en/vl6180x-tof-proximity-and-ambient-light-sensor
  * 
  * For reference I did not delete the original comments:
  */
