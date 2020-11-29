@@ -1,6 +1,6 @@
 /******************************************************************************
  * Modified by Wolfgang (Wolle) Ewald
- * https://wolles-elektronikkiste.de/vl6180x-tof-proximity-and-ambient-light-sensor?lang=en
+ * https://wolles-elektronikkiste.de/en/vl6180x-tof-proximity-and-ambient-light-sensor
  * 
  * ****************************************************************************
  * Based on the Sparkfun library example for the VL6180X:
