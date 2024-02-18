@@ -15,10 +15,18 @@
 
 VL6180xIdentification identification;
 VL6180x sensor(VL6180X_ADDRESS);
-byte interruptPin=2;
-byte ledPin=13;
+int interruptPin = 2;
+int ledPin = 13;
 volatile bool event = false;
 int gain;
+
+#if defined(ESP8266) || defined(ESP32)
+void IRAM_ATTR blink(){
+#else
+void blink(){
+#endif
+  event = true;
+}
 
 void setup() {
   pinMode(ledPin, OUTPUT);
@@ -26,15 +34,14 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(interruptPin), blink, FALLING);
   Serial.begin(9600); 
   Wire.begin(); //Start I2C library
-  delay(100); // delay .1s
 
   if(sensor.VL6180xInit() != 0){
     Serial.println("FAILED TO INITALIZE"); //Initialize device and check for errors
     }
 
-  sensor.VL6180xDefautSettings(); //Load default settings to get started.
+  sensor.VL6180xDefaultSettings(); //Load default settings to get started.
   
-  delay(1000); // delay 1s
+  delay(100); // delay 1s
 
   //Input GAIN for light levels, 
   // GAIN_20     // Actual ALS Gain of 20
@@ -46,7 +53,16 @@ void setup() {
   // GAIN_1      // Actual ALS Gain of 1.01
   // GAIN_40     // ActualALS Gain of 40
 
-  // Range Threshold Interrupt:
+  /* Range Threshold Interrupt:
+   * The interrupt is set up with VL6180xSetDistInt(low limit / high limit);
+   * The interrupt is triggered if the measured distance value is OUTSIDE these 
+   * limits. Keep in mind that the VL6180x will return a distance of 255 if 
+   * nothing is in the measuring range.
+   * Examples: 
+   * low limit = 50, high limit = 150 => interrupt is triggered at < 50 and > 150
+   * low limit = 50, high limit = 255 => interrupt is triggered at < 50
+   * low limit = 0, high limit = 50 => interrupts is triggered at > 50
+   */
   sensor.VL6180xSetDistInt(50,150); 
   sensor.getDistanceContinously();
   
@@ -68,9 +84,4 @@ void loop() {
     event = false;
     sensor.VL6180xClearInterrupt();
   }
-  while(!event)delay(1);  
-}
-
-void blink(){
-  event = true;
 }
