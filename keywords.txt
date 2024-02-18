@@ -19,6 +19,7 @@ VL6180xIdentification	KEYWORD1
 
 VL6180xInit	KEYWORD2
 VL6180xDefautSettings	KEYWORD2
+VL6180xDefaultSettings	KEYWORD2
 getDistance	KEYWORD2
 getAmbientLight	KEYWORD2
 getIdentification	KEYWORD2
