@@ -41,7 +41,7 @@ void setup() {
 
   sensor.VL6180xDefaultSettings(); //Load default settings to get started.
   
-  delay(100); // delay 1s
+  delay(100); // delay 0.1s
 
   //Input GAIN for light levels, 
   // GAIN_20     // Actual ALS Gain of 20
