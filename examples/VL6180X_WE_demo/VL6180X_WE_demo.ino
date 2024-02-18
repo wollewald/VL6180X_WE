@@ -68,7 +68,7 @@ void setup() {
     Serial.println("FAILED TO INITALIZE"); //Initialize device and check for errors
   }; 
 
-  sensor.VL6180xDefautSettings(); //Load default settings to get started.
+  sensor.VL6180xDefaultSettings(); //Load default settings to get started.
   
     delay(1000); // delay 1s
 
