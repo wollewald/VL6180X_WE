@@ -22,9 +22,9 @@
  * This library uses the Arduino Wire.h to complete I2C transactions.
  * 
  * Development environment specifics:
- * 	IDE: Arduino 1.0.5
- * 	Hardware Platform: Arduino Pro 3.3V/8MHz
- * 	VL6180x Breakout Version: 1.0
+ *  IDE: Arduino 1.0.5
+ *  Hardware Platform: Arduino Pro 3.3V/8MHz
+ *  VL6180x Breakout Version: 1.0
  * **Updated for Arduino 1.6.4 5/2015**
  * 
  * This code is beerware. If you see me (or any other SparkFun employee) at the
@@ -86,7 +86,7 @@ uint8_t VL6180x::VL6180xInit(void){
   return 0;
 }
 
-void VL6180x::VL6180xDefautSettings(void){
+void VL6180x::VL6180xDefaultSettings(void){
   //Recommended settings from datasheet
   //http://www.st.com/st-web-ui/static/active/en/resource/technical/document/application_note/DM00122600.pdf
 
@@ -111,6 +111,11 @@ void VL6180x::VL6180xDefautSettings(void){
   VL6180x_setRegister(VL6180X_SYSALS_ANALOGUE_GAIN,0x40);
   VL6180x_setRegister(VL6180X_FIRMWARE_RESULT_SCALER,0x01);
 }
+
+void VL6180x::VL6180xDefautSettings(void){  // wrong spelling, kept for compatibility reasons
+  VL6180xDefaultSettings();
+}
+
 void VL6180x::getIdentification(struct VL6180xIdentification *temp){
 
   temp->idModel =  VL6180x_getRegister(VL6180X_IDENTIFICATION_MODEL_ID);
@@ -146,7 +151,7 @@ uint8_t VL6180x::getDistance()
   delay(10);
   VL6180x_setRegister(VL6180X_SYSTEM_INTERRUPT_CLEAR, 0x07);
   return VL6180x_getRegister(VL6180X_RESULT_RANGE_VAL);
-  //	return distance;
+  //    return distance;
 }
 
 
@@ -277,7 +282,7 @@ void VL6180x::VL6180xSetALSInt(vl6180x_als_gain VL6180X_ALS_GAIN, uint16_t lowTh
     case GAIN_1: alsGain = 1.01; break;
     case GAIN_40: alsGain = 40.0; break;
   }
-	
+    
   uint16_t alsLowThresRaw = (uint16_t)((float)lowThres * alsGain) / (alsIntegrationPeriod *0.32);
   uint16_t alsHighThresRaw = (uint16_t)((float)highThres * alsGain) / (alsIntegrationPeriod *0.32);
   Serial.println(alsLowThresRaw);
@@ -296,7 +301,7 @@ uint8_t VL6180x::getDistanceContinously()
   VL6180x_setRegister(VL6180X_SYSTEM_INTERRUPT_CLEAR, 0x07);
   VL6180x_setRegister(VL6180X_SYSTEM_HISTORY_CTRL, 0x01); // enable history buffer for range
   return VL6180x_getRegister(VL6180X_RESULT_RANGE_VAL);
-  //	return distance;
+  //    return distance;
 }
 
 uint8_t VL6180x::getLastDistanceFromHistory()
@@ -384,5 +389,5 @@ float VL6180x::getLastAmbientLightFromHistory(vl6180x_als_gain VL6180X_ALS_GAIN)
 }
 
 void VL6180x::VL6180xClearInterrupt(void){
-	VL6180x_setRegister(VL6180X_SYSTEM_INTERRUPT_CLEAR, 0x07);
+    VL6180x_setRegister(VL6180X_SYSTEM_INTERRUPT_CLEAR, 0x07);
 }

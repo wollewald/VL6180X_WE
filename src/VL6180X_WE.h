@@ -22,9 +22,9 @@
  * This library uses the Arduino Wire.h to complete I2C transactions.
  * 
  * Development environment specifics:
- * 	IDE: Arduino 1.0.5
- * 	Hardware Platform: Arduino Pro 3.3V/8MHz
- * 	VL6180x Breakout Version: 1.0
+ *  IDE: Arduino 1.0.5
+ *  Hardware Platform: Arduino Pro 3.3V/8MHz
+ *  VL6180x Breakout Version: 1.0
  
  **Updated for Arduino 1.6.4 5/2015**
  * 
@@ -143,7 +143,7 @@ struct VL6180xIdentification
 
 class VL6180x
 {
-public:	
+public: 
   //Initalize library with default address
   VL6180x(uint8_t address);
   //Send manditory settings as stated in ST datasheet.
@@ -151,7 +151,8 @@ public:
   uint8_t VL6180xInit(void);
   // Use default settings from ST data sheet section 9.
   // http://www.st.com/st-web-ui/static/active/en/resource/technical/document/application_note/DM00122600.pdf
-  void VL6180xDefautSettings(void);
+  void VL6180xDefautSettings(void); // wrong spelling - kept for compatibility
+  void VL6180xDefaultSettings(void);
 
   // Get Range distance in (mm)
   uint8_t getDistance();
