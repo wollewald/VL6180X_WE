@@ -59,7 +59,6 @@ void setup() {
 
   Serial.begin(9600); //Start Serial at 9600bps
   Wire.begin(); //Start I2C library
-  delay(100); // delay .1s
 
   sensor.getIdentification(&identification); // Retrieve manufacture info from device memory
   printIdentification(&identification); // Helper function to print all the Module information
@@ -70,7 +69,7 @@ void setup() {
 
   sensor.VL6180xDefaultSettings(); //Load default settings to get started.
   
-    delay(1000); // delay 1s
+    delay(100); // delay 0.1 s
 
 
 }
