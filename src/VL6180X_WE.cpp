@@ -38,7 +38,14 @@
 VL6180x::VL6180x(uint8_t address)
 // Initialize the Library
 {
-  Wire.begin(); // Arduino Wire library initializer
+  _wire = &Wire;
+  _i2caddress = address; //set default address for communication
+}
+
+VL6180x::VL6180x(TwoWire *w, uint8_t address)
+// Initialize the Library
+{
+  _wire = w;
   _i2caddress = address; //set default address for communication
 }
 
@@ -204,12 +211,12 @@ uint8_t VL6180x::VL6180x_getRegister(uint16_t registerAddr)
 {
   uint8_t data;
 
-  Wire.beginTransmission( _i2caddress ); // Address set on class instantiation
-  Wire.write((registerAddr >> 8) & 0xFF); //MSB of register address
-  Wire.write(registerAddr & 0xFF); //LSB of register address
-  Wire.endTransmission(false); //Send address and register address bytes
-  Wire.requestFrom( _i2caddress , 1);
-  data = Wire.read(); //Read Data from selected register
+  _wire->beginTransmission( _i2caddress ); // Address set on class instantiation
+  _wire->write((registerAddr >> 8) & 0xFF); //MSB of register address
+  _wire->write(registerAddr & 0xFF); //LSB of register address
+  _wire->endTransmission(false); //Send address and register address bytes
+  _wire->requestFrom( _i2caddress , 1);
+  data = _wire->read(); //Read Data from selected register
 
   return data;
 }
@@ -220,14 +227,14 @@ uint16_t VL6180x::VL6180x_getRegister16bit(uint16_t registerAddr)
   uint8_t data_high;
   uint16_t data;
 
-  Wire.beginTransmission( _i2caddress ); // Address set on class instantiation
-  Wire.write((registerAddr >> 8) & 0xFF); //MSB of register address
-  Wire.write(registerAddr & 0xFF); //LSB of register address
-  Wire.endTransmission(false); //Send address and register address bytes
+  _wire->beginTransmission( _i2caddress ); // Address set on class instantiation
+  _wire->write((registerAddr >> 8) & 0xFF); //MSB of register address
+  _wire->write(registerAddr & 0xFF); //LSB of register address
+  _wire->endTransmission(false); //Send address and register address bytes
 
-  Wire.requestFrom( _i2caddress, 2);
-  data_high = Wire.read(); //Read Data from selected register
-  data_low = Wire.read(); //Read Data from selected register
+  _wire->requestFrom( _i2caddress, 2);
+  data_high = _wire->read(); //Read Data from selected register
+  data_low = _wire->read(); //Read Data from selected register
   data = (data_high << 8)|data_low;
 
   return data;
@@ -235,24 +242,24 @@ uint16_t VL6180x::VL6180x_getRegister16bit(uint16_t registerAddr)
 
 void VL6180x::VL6180x_setRegister(uint16_t registerAddr, uint8_t data)
 {
-  Wire.beginTransmission( _i2caddress ); // Address set on class instantiation
-  Wire.write((registerAddr >> 8) & 0xFF); //MSB of register address
-  Wire.write(registerAddr & 0xFF); //LSB of register address
-  Wire.write(data); // Data/setting to be sent to device.
-  Wire.endTransmission(); //Send address and register address bytes
+  _wire->beginTransmission( _i2caddress ); // Address set on class instantiation
+  _wire->write((registerAddr >> 8) & 0xFF); //MSB of register address
+  _wire->write(registerAddr & 0xFF); //LSB of register address
+  _wire->write(data); // Data/setting to be sent to device.
+  _wire->endTransmission(); //Send address and register address bytes
 }
 
 void VL6180x::VL6180x_setRegister16bit(uint16_t registerAddr, uint16_t data)
 {
-  Wire.beginTransmission( _i2caddress ); // Address set on class instantiation
-  Wire.write((registerAddr >> 8) & 0xFF); //MSB of register address
-  Wire.write(registerAddr & 0xFF); //LSB of register address
+  _wire->beginTransmission( _i2caddress ); // Address set on class instantiation
+  _wire->write((registerAddr >> 8) & 0xFF); //MSB of register address
+  _wire->write(registerAddr & 0xFF); //LSB of register address
   uint8_t temp;
   temp = (data >> 8) & 0xff;
-  Wire.write(temp); // Data/setting to be sent to device
+  _wire->write(temp); // Data/setting to be sent to device
   temp = data & 0xff;
-  Wire.write(temp); // Data/setting to be sent to device
-  Wire.endTransmission(); //Send address and register address bytes
+  _wire->write(temp); // Data/setting to be sent to device
+  _wire->endTransmission(); //Send address and register address bytes
 }
 
 // Wolles zusätzliche Funktionen

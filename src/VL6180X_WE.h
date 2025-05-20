@@ -146,6 +146,8 @@ class VL6180x
 public: 
   //Initalize library with default address
   VL6180x(uint8_t address);
+  VL6180x(TwoWire *w, uint8_t address);
+  
   //Send manditory settings as stated in ST datasheet.
   // http://www.st.com/st-web-ui/static/active/en/resource/technical/document/application_note/DM00122600.pdf (Section 1.3)
   uint8_t VL6180xInit(void);
@@ -190,7 +192,7 @@ private:
   //Store address given when the class is initialized.
   //This value can be changed by the changeAddress() function
   int _i2caddress;
-
+  TwoWire *_wire;
   uint8_t VL6180x_getRegister(uint16_t registerAddr);
   uint16_t VL6180x_getRegister16bit(uint16_t registerAddr);
 
