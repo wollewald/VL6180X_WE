@@ -40,16 +40,6 @@
 
 #include <Wire.h>
 #include <VL6180X_WE.h>
-
-/*const float GAIN_1    = 1.01;  // Actual ALS Gain of 1.01
-const float GAIN_1_25 = 1.28;  // Actual ALS Gain of 1.28
-const float GAIN_1_67 = 1.72;  // Actual ALS Gain of 1.72
-const float GAIN_2_5  = 2.6;   // Actual ALS Gain of 2.60
-const float GAIN_5    = 5.21;  // Actual ALS Gain of 5.21
-const float GAIN_10   = 10.32; // Actual ALS Gain of 10.32
-const float GAIN_20   = 20;    // Actual ALS Gain of 20
-const float GAIN_40   = 40;    // Actual ALS Gain of 40
-*/
 #define VL6180X_ADDRESS 0x29
 #define I2C_SDA 27
 #define I2C_SCL 26
@@ -68,15 +58,11 @@ void setup() {
     Serial.println("FAILED TO INITALIZE"); //Initialize device and check for errors
   }; 
 
-  sensor.VL6180xDefaultSettings(); //Load default settings to get started.
-  
-    delay(100); // delay 0.1 s
-
-
+  sensor.VL6180xDefaultSettings(); //Load default settings to get started.  
+  delay(100); // delay 0.1 s
 }
 
 void loop() {
-
   //Get Ambient Light level and report in LUX
   Serial.print("Ambient Light Level (Lux) = ");
   
@@ -89,7 +75,6 @@ void loop() {
   // GAIN_1_25   // Actual ALS Gain of 1.28
   // GAIN_1      // Actual ALS Gain of 1.01
   // GAIN_40     // Actual ALS Gain of 40
-  
   Serial.println( sensor.getAmbientLight(GAIN_1) );
 
   //Get Distance and report in mm
